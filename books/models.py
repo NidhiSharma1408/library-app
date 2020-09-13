@@ -8,4 +8,4 @@ class Book(models.Model):
     describe = models.TextField(default='DataFlair Django Tutorials')
     def __str__(self):
         return self.name
-    
+   

@@ -1,10 +1,8 @@
 from django.contrib import admin
-from django.urls import path
-from books import views
+from django.urls import path,include
+from django.conf import settings
+from django.conf.urls.static import static
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('upload/', views.upload, name='upload-book'),
-    path('<int:book_id>/edit/', views.update_book, name='update'),
-    path('<int:book_id>/delete/', views.delete_book, name="delete"),
+    path('', include('books.urls')),
     path('admin/', admin.site.urls),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

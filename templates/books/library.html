@@ -4,11 +4,10 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>BOOK TITLE</title>
+    <title>BOOKs APP</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">    
 </head>
 <body style="background-color:#4DB6AC;">
     <nav class="navbar navbar-light" style="background-color:#FF0033;">
@@ -20,12 +19,25 @@
         <a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' style="background-color:#FFCC33;color:#000000;">Admin</a>
         <a href="{% url 'upload-book' %}" class="navbar-link btn-lg" style="background-color:#FFCC33;color:#000000;">Upload Books</a>
     </nav>
-    {% if books %}
-        <h1>NO Books available</h1>
-    {% else %}
-        <h1>
-            books he books
-        </h1>
-    {% endif %}
+    {% block content %}
+        <div class="card-columns">
+            {% for book in books %}
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ book.picture.url }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.name }}</h5>
+                    <p class="card-text">{{ book.describe }}</p>
+                    <div class="card-footer bg-transparent border-dark">
+                    <p class="card-title">{{book.author}}</p>
+                    <center>
+                        <a href="update/{{book.id}}" class="btn btn-warning" id = '{{book.id}}'>edit</a>
+                        <a href="delete/{{book.id}}" class="btn btn-danger" id = '{{book.id}}'>delete</a>
+                    </center>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
 </body>
 </html>
