@@ -29,7 +29,7 @@ def update_book(request, book_id):
     book_form = BookCreate(request.POST or None, instance = book_sel)
     if book_form.is_valid():
         book_form.save()
-    return redirect('index')
+        return redirect('index')
     return render(request, 'books/upload_form.html', {'upload_form':book_form})
 
 def delete_book(request , book_id):
